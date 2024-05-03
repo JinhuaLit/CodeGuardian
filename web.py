@@ -65,7 +65,7 @@ def predict():
     # Prepare top lines for JSON response (sending indices only)
     top_lines_indices_list = [idx for idx, _ in top_lines_indices]
 
-    return jsonify(emoji=emoji, topLines=top_lines_indices_list)
+    return jsonify(emoji=emoji, topLines=top_lines_indices_list, label=predicted_label)
 
 if __name__ == '__main__':
     app.run(debug=True)
