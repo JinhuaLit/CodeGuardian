@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Code Classification Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/gruvbox-dark.min.css"/>
     <style>
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -13,9 +16,7 @@
             height: 100vh;
         }
         header {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             text-align: center;
-            justify-content: center;
             background-color: #fffcf2;
             font-size: 50px;
             padding-top: 2%;
@@ -31,72 +32,53 @@
         }
         #leftPanel, #rightPanel {
             padding: 20px;
-            padding-top: 5px;
             display: flex;
             flex-direction: column;
         }
         #leftPanel {
             width: 60%;
-            height: 65%;
+            height: 85%;
             margin-right: 3%;
             border-radius: 30px;
-            outline: 5px solid #403d39; /* Change #ff0000 to the color you want */
+            outline: 5px solid #403d39;
             padding-top: 20px;
         }
         #rightPanel {
-            width: 25%;
-            height: 70%;
-            align-items: center; /* Centers the content horizontally */
-            justify-content: center; /* Centers the content vertically */
+            width: 20%;
+            height: 55%;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             background-color: #ccc5b9;
             border-radius: 50px;
         }
-        textarea, #codeDisplay {
-            flex-grow: 1;
-            padding: 10px;
+        .CodeMirror {
+            height: auto;
             border: 1px solid #ccc;
             border-radius: 4px;
-            overflow-y: auto; /* Adds a vertical scrollbar if needed */
-            font-size: 14px; /* Consistent font size */
-            line-height: 1.5; /* Consistent line height */
-            white-space: pre-wrap; /* For textarea to maintain formatting */
-            background-color: white;
-           
-        }
-
-        .code-line {
-            margin: 0; /* Removes any default margin */
-
         }
         .button-container {
             padding: 10px;
-            text-align: center; /* Centers buttons */
-            justify-content: center;
-        }
-        .panel-title-container {
-            padding: 10px;
-            text-align: center; /* Centers buttons */
-            justify-content: center;
+            text-align: center;
         }
         button {
             padding: 10px 20px;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: 20px;
+            font-size: 15px;
             margin: 10px;
+            margin-bottom: 0px;
             border: none;
             background-color: #eb5e28;
             color: white;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-bottom: 3px;
         }
         button:hover {
             background-color: #0056b3;
         }
         .highlight {
             background-color: #f07167;
+            opacity: 0.5;
         }
         #predictionResult{
             font-size: 40px;
@@ -109,36 +91,45 @@
             font-size: 20px;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
 </head>
 <body>
     <header><span style="color: #eb5e28;">Code Guardian</span>: just ChatGPTed? 😈</header>
-    <div class = "instructions">
+    <div class="instructions">
         <p>⌨️ Enter your C code in the left panel and click "Classify Code" to see if the code is written by a human or generated using AI.</p>
         <p>🆘 The top 5 lines that contributed to the result will be highlighted in maroon.</p>
         <p>💨 This model is fine-tuned using open-sourced RoBerta.</p>
     </div>
     <div id="main">
         <div id="leftPanel">
-            <!-- <div class="panel-title-container">
-                <h2>Enter the code to be tested below: </h2>
-            </div> -->
-            <textarea id="inputCode" placeholder="Enter your code here..." style="height: 45vh;"></textarea>
-            <div id="codeDisplay" style="height: 45vh; display: none;"></div>
+            <textarea id="inputCode" placeholder="Enter your code here..."></textarea>
             <div class="button-container">
                 <button onclick="sendCode()">Classify Code</button>
                 <button onclick="resetInput()" style="display: none;">Check Another Code</button>
             </div>
         </div>
         <div id="rightPanel">
-            <!-- Emoji and prediction text will be displayed here -->
             <div id="predictionResult"></div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/display/placeholder.min.js"></script>
+
     <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("inputCode"), {
+            lineNumbers: true,
+            mode: "text/x-csrc",
+            viewportMargin: Infinity,
+            height: "500px",
+            placeholder: "Enter your code here...",
+            theme: "gruvbox-dark"
+        });
+        editor.setSize(null, "500px"); // Set the size to null for width (auto) and 450px for height
+
+
         function sendCode() {
-    const code = document.getElementById('inputCode').value;
+            const code = editor.getValue();
             fetch('/predict', {
                 method: 'POST',
                 body: new URLSearchParams(`code=${code}`)
@@ -146,42 +137,29 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('rightPanel').innerHTML = `<div id="emoji">${data.emoji}</div><div id="predictionResult">${data.label}</div>`;
-                displayCodeWithHighlights(code, data.topLines);
-                document.getElementById('inputCode').style.display = 'none'; // Hide input area
-                document.getElementById('codeDisplay').style.display = ''; // Show code display
-                document.querySelector('button[onclick="resetInput()"]').style.display = ''; // Show reset button
+                editor.setOption("readOnly", true);
+                highlightLines(data.topLines);
+                document.querySelector('button[onclick="sendCode()"]').style.display = 'none'; // Hide "Classify Code" button
+                document.querySelector('button[onclick="resetInput()"]').style.display = '';
             });
         }
 
-
-
-        // function displayCodeWithHighlights(code, topLines) {
-        //     const lines = code.split('\n');
-        //     const highlightedCode = lines.map((line, index) => {
-        //         const formattedLine = `<pre class='code-line ${topLines.includes(index) ? "highlight" : ""}'>${line}</pre>`; // Using <pre> tag with conditional highlighting
-        //         return formattedLine;
-        //     }).join('');
-        //     document.getElementById('codeDisplay').innerHTML = highlightedCode;
-        // }
-        function displayCodeWithHighlights(code, topLines) {
-            const lines = code.split('\n');
-            const highlightedCode = lines.map((line, index) => {
-                // Add a non-breaking space if the line is empty to ensure it's rendered
-                const content = line || '\u00A0'; // Unicode for non-breaking space
-                const highlightClass = topLines.includes(index) ? "highlight" : "";
-                return `<pre class='code-line ${highlightClass}'>${content}</pre>`; // Use <pre> tag with conditional highlighting
-            }).join('');
-            document.getElementById('codeDisplay').innerHTML = highlightedCode;
+        function highlightLines(topLines) {
+            editor.eachLine((line) => {
+                const lineNumber = editor.getLineNumber(line);
+                if (topLines.includes(lineNumber)) {
+                    editor.addLineClass(line, 'background', 'highlight');
+                }
+            });
         }
-
 
         function resetInput() {
-            document.getElementById('inputCode').value = ''; // Clear the value of the input box
-            document.getElementById('inputCode').style.display = ''; // Show input area
-            document.getElementById('codeDisplay').style.display = 'none'; // Hide code display
-            document.querySelector('button[onclick="resetInput()"]').style.display = 'none'; // Hide reset button
+            editor.setOption("readOnly", false);
+            editor.setValue('');
+            editor.clearGutter();
+            document.querySelector('button[onclick="sendCode()"]').style.display = ''; // Show "Classify Code" button
+            document.querySelector('button[onclick="resetInput()"]').style.display = 'none';
         }
-
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
 </body>
