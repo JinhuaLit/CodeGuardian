@@ -157,6 +157,7 @@
             editor.setOption("readOnly", false);
             editor.setValue('');
             editor.clearGutter();
+            document.getElementById('rightPanel').innerHTML = ``;
             document.querySelector('button[onclick="sendCode()"]').style.display = ''; // Show "Classify Code" button
             document.querySelector('button[onclick="resetInput()"]').style.display = 'none';
         }
