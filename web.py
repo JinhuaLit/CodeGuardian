@@ -27,7 +27,7 @@ def predict():
         outputs = model(**encoding, output_attentions=True)
         predictions = outputs.logits.argmax(-1)
     predicted_label = label_encoder.inverse_transform(predictions.cpu().numpy())[0]
-    emoji = '🤖' if predicted_label == 'AI-written' else '👤'
+    emoji = '🤖' if predicted_label == 'AI-written' else '🤦🏻‍♂️'
 
     # Process attention weights to calculate line weights
     attention_weights = outputs.attentions[-1].squeeze().mean(dim=0).cpu().numpy()
