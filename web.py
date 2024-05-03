@@ -60,7 +60,7 @@ def predict():
     # Normalize and sort line weights
     total_weight = sum(weight for _, weight in line_attention_weights)
     line_attention_weights = [(idx, weight / total_weight) for idx, weight in line_attention_weights]
-    top_lines_indices = sorted(line_attention_weights, key=lambda x: x[1], reverse=True)[:5]
+    top_lines_indices = sorted(line_attention_weights, key=lambda x: x[1], reverse=True)[:10]
 
     # Prepare top lines for JSON response (sending indices only)
     top_lines_indices_list = [idx for idx, _ in top_lines_indices]
