@@ -136,6 +136,29 @@
             transition: max-height 0.2s ease-out;
             font-size: 20px;
         }
+        /* For the scrollbar itself */
+        ::-webkit-scrollbar {
+            width: 12px;  /* Vertical scrollbar width */
+            height: 12px; /* Horizontal scrollbar height */
+            background: #444;  /* Lighter grey scrollbar track */
+        }
+
+        /* For the draggable part of the scrollbar */
+        ::-webkit-scrollbar-thumb {
+            background-color: darkgray;  /* Dark grey scrollbar thumb */
+            border-radius: 6px;  /* Rounded corners on the scrollbar thumb */
+        }
+
+        /* For the part of the scrollbar track where the thumb isn't */
+        ::-webkit-scrollbar-track {
+            background: #444;  /* Lighter grey scrollbar track */
+            border-radius: 6px;  /* Rounded corners on the scrollbar track */
+        }
+
+        /* Style the resizer within a scrolling element */
+        ::-webkit-scrollbar-resizer {
+            background: #444; /* Dark grey to match the scrollbar thumb */
+        }
 
     </style>
 </head>
