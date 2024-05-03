@@ -20,6 +20,7 @@
             background-color: #fffcf2;
             font-size: 50px;
             padding-top: 2%;
+            padding-bottom: 2%;
             font-weight: bold;
             color: #252422;
         }
@@ -27,6 +28,7 @@
             display: flex;
             flex-grow: 1;
             padding: 20px;
+            padding-top: 10px;
             justify-content: center;
             align-items: center;
             height: 100%;
@@ -108,14 +110,44 @@
         #inputCode {
             border-radius: 4px;
         }
+        .collapsible {
+            cursor: pointer;
+            padding: 10px;
+            width: 85%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+        .instruction-container {
+            text-align: center;
+            background-color: #fffcf2;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            background-color: #fffcf2;
+            transition: max-height 0.2s ease-out;
+            font-size: 20px;
+        }
+
     </style>
 </head>
 <body>
     <header><span style="color: #e26d5c;">Code🚨Guardian:</span> just ChatGPTed? </header>
-    <div class="instructions">
+    <div class="instruction-container">
+    <button class="collapsible">Instructions</button>
+    <div class="content">
         <p>⌨️ Enter your C code in the left panel and click "Classify Code" to see if the code is written by a human or generated using AI.</p>
         <p>🆘 The top 10 lines that contributed to the result will be highlighted in maroon.</p>
         <p>💨 This model is fine-tuned using open-sourced RoBerta.</p>
+    </div>
     </div>
     <div id="main">
         <div id="leftPanel">
@@ -179,6 +211,20 @@
             document.querySelector('button[onclick="resetInput()"]').style.display = 'none';
         }
     </script>
+    <script>
+        var coll = document.querySelector(".collapsible");
+        var content = document.querySelector(".content");
+    
+        coll.addEventListener("click", function() {
+            this.classList.toggle("active");
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
 </body>
 </html>
