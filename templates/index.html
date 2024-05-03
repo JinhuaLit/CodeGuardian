@@ -21,6 +21,7 @@
             font-size: 50px;
             padding-top: 2%;
             font-weight: bold;
+            color: #252422;
         }
         #main {
             display: flex;
@@ -73,7 +74,7 @@
             margin: 10px;
             margin-bottom: 0px;
             border: none;
-            background-color: #eb5e28;
+            background-color: #e26d5c;
             color: white;
             border-radius: 4px;
             cursor: pointer;
@@ -101,6 +102,7 @@
             font-size: 20px;
             padding-right: 2%;
             background-color: #ccc5b9;
+            color: #252422;
         }
         #inputCode {
             border-radius: 4px;
@@ -108,7 +110,7 @@
     </style>
 </head>
 <body>
-    <header><span style="color: #eb5e28;">Code Guardian:</span> just ChatGPTed? 😈</header>
+    <header><span style="color: #e26d5c;">Code🚨Guardian:</span> just ChatGPTed? </header>
     <div class="instructions">
         <p>⌨️ Enter your C code in the left panel and click "Classify Code" to see if the code is written by a human or generated using AI.</p>
         <p>🆘 The top 10 lines that contributed to the result will be highlighted in maroon.</p>
@@ -118,7 +120,7 @@
         <div id="leftPanel">
             <textarea id="inputCode" placeholder="Enter your code here..."></textarea>
             <div class="button-container">
-                <button onclick="sendCode()">🔎 Classify Code</button>
+                <button onclick="sendCode()">🔎 Check This Code!</button>
                 <button onclick="resetInput()" style="display: none;">👀 Check Another Code</button>
             </div>
         </div>
