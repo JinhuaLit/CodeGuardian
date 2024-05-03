@@ -7,15 +7,19 @@
         body { display: flex; }
         #leftPanel { width: 60%; }
         #rightPanel { width: 40%; display: flex; align-items: center; justify-content: center; font-size: 48px; }
-        textarea { width: 100%; height: 90vh; }
+        .highlight { background-color: yellow; } /* Highlighting style */
+        textarea, #codeDisplay { width: 100%; height: 90vh; }
+        code-line {white-space: pre;}
     </style>
 </head>
 <body>
     <div id="leftPanel">
         <textarea id="inputCode" placeholder="Enter your code here..."></textarea>
         <button onclick="sendCode()">Classify Code</button>
+        <button onclick="resetInput()" style="display: none;">Check Another Code</button>
+        <div id="codeDisplay" style="display: none;"></div> <!-- Area to display code with highlights -->
     </div>
-    <div id="rightPanel" id="result">
+    <div id="rightPanel">
         <!-- Emoji will be displayed here -->
     </div>
 
@@ -29,7 +33,36 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('rightPanel').textContent = data.emoji;
+                displayCodeWithHighlights(code, data.topLines);
+                document.getElementById('inputCode').style.display = 'none'; // Hide input area
+                document.getElementById('codeDisplay').style.display = ''; // Show code display
+                document.querySelector('button[onclick="resetInput()"]').style.display = ''; // Show reset button
             });
+        }
+
+        // function displayCodeWithHighlights(code, topLines) {
+        //     const lines = code.split('\n');
+        //     const highlightedCode = lines.map((line, index) => {
+        //         if (topLines.includes(index)) { // Check if the current index is in topLines
+        //             return `<div class="highlight">${line}</div>`;
+        //         }
+        //         return `<div>${line}</div>`;
+        //     }).join('');
+        //     document.getElementById('codeDisplay').innerHTML = highlightedCode;
+        // }
+        function displayCodeWithHighlights(code, topLines) {
+            const lines = code.split('\n');
+            const highlightedCode = lines.map((line, index) => {
+                const formattedLine = `<pre class='code-line ${topLines.includes(index) ? "highlight" : ""}'>${line}</pre>`; // Using <pre> tag with conditional highlighting
+                return formattedLine;
+            }).join('');
+            document.getElementById('codeDisplay').innerHTML = highlightedCode;
+        }
+
+        function resetInput() {
+            document.getElementById('inputCode').style.display = ''; // Show input area
+            document.getElementById('codeDisplay').style.display = 'none'; // Hide code display
+            document.querySelector('button[onclick="resetInput()"]').style.display = 'none'; // Hide reset button
         }
     </script>
 </body>
