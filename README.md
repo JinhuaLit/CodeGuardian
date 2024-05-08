@@ -39,11 +39,13 @@ In order to train our model, following pipelines are adopted:
 
 ### RoBerta-base
 ![Data Generation](./images/roberta.png)
+
 We trained our model using computing power from *Google Colab* in `roberta/roberta.ipynb`. You can follow the procedures inside to train the model. 
 
 
 ### SVM
 ![Data Generation](./images/svm.png)
+
 The trained SVM model is included in 'SVM/SVM.ipynb.'
 
 ### Pre-trained model
