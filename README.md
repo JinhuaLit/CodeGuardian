@@ -123,5 +123,6 @@ Challenge: Currently, our model is relatively inaccurate when dealing with long 
 
 ## Reference
 - [Automatic Detection of Machine Generated Text: A Critical Survey](https://arxiv.org/pdf/2011.01314)
+- [Discriminating Human-authored from ChatGPT-Generated Code Via Discernable Feature Analysis](https://arxiv.org/pdf/2306.14397)
 
 ## Thanks to Professor Ritambhara Singh and all TAs!!!
