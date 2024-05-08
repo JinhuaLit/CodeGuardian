@@ -77,7 +77,7 @@ $$
 \text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
 $$
 
-​- Interpretation: An F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0. It is particularly useful when you need to balance precision (the accuracy of positive predictions) and recall (the ability of the model to find all the relevant cases).
+- Interpretation: An F1 score reaches its best value at 1 (perfect precision and recall) and worst at 0. It is particularly useful when you need to balance precision (the accuracy of positive predictions) and recall (the ability of the model to find all the relevant cases).
 
 4. AUC Score (Area Under the ROC Curve)
 Description: The AUC score is the area under the Receiver Operating Characteristic (ROC) curve, which is a plot of the true positive rate against the false positive rate at various threshold settings. The AUC score represents the likelihood of the model distinguishing between the positive and negative classes.
