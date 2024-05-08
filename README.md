@@ -1,6 +1,6 @@
 # CodeGuardian
-In this project, we developed a tool that detect machine-generated code. To achieve this,
-we fine-tuned RoBerta-base model with our self-collected data. This repository hold content for
+In this project, we developed a tool that detects machine-generated code. To achieve this,
+we fine-tuned the RoBerta-base model with our self-collected data and compared the results with SVM(Support Vector Machine). This repository holds content for
 1. Data Collection
 2. Exploratory Data Analysis
 3. Model Training and Deployment 
@@ -8,11 +8,11 @@ we fine-tuned RoBerta-base model with our self-collected data. This repository h
 ## Demo
 We developed a Flask web app to host our model. It can be accessed here: [demo](http://codecovenant.com/)
 ![web demo](./images/demo.png)
-You can input a piece of code snippet and the model will classify whether the code is written by human or AI. 
-The lines that contributed the most to the prediction result will be highlighed in color.
+You can input a code snippet, and the model will classify whether it was written by a human or an AI. 
+The lines that contributed the most to the prediction result will be highlighted in color.
 
 ## Requirements
-Since this repo involves training and tuning the model, please have the following packages installed before proceeding. Alternatively, you may choose to use tools like *Google Colab*. 
+Since this repo involves training and tuning the model, please install the following packages before proceeding. Alternatively, you may choose to use tools like *Google Colab*. 
 ```
 transformers
 datasets
@@ -34,9 +34,12 @@ To generate AI-written code, we adopted OpenAI's api and asychronously retrived 
 To ensure balance and fairness in our training data, we exploratorily analyzed our training data using `eda/EDA.ipynb`. Inside, we generated word cloud images and distribution of code file lengths in our data. 
 You can follow the procedure in the notebook to see the outputs. 
 
-
 ## Training the model
+### RoBerta-base
 We trained our model using computing power from *Google Colab* in `roberta/roberta.ipynb`. You can follow the procedures inside to train the model. 
+
+### SVM
+The trained SVM model is included in 'SVM/SVM.ipynb.'
 
 ### Pre-trained model
 To use our already fine-tuned model, you can directly use it from Huggingface. To use the pretrained tokenizer and 
