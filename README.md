@@ -97,7 +97,17 @@ $$
 - Interpretation: An AUC score of 0.5 suggests no discriminative ability (equivalent to random guessing), while a score of 1.0 indicates perfect discrimination. A higher AUC value means a better performing model in terms of distinguishing between positive and negative classes across all thresholds.
 
 ## Results
+The result is shown below: 
+![Data Generation](./images/results.png)
 
+RoBERTa outperforms SVM across most of metrics and difficulty levels, indicating its ability to handle both classification accuracy and balance between precision and recall.
+
+- Easy Tasks:
+RoBERTa shows a significant advantage in all metrics with an accuracy of 0.9556, F1-score of 0.9565, and AUC-score of 0.9652 compared to SVM's 0.6833, 0.6698, and 0.7366 respectively. This suggests that RoBERTa is better suited for handling tasks where the complexity is lower.
+- Medium Tasks:
+The performance gap between the two models narrows slightly in medium difficulty, but RoBERTa still maintains a strong lead with an accuracy of 0.8617, F1-score of 0.8602, and AUC-score of 0.8213 compared to SVM’s 0.7147, 0.6706, and 0.7173. This indicates RoBERTa's robustness in moderately challenging scenarios.
+- Hard Tasks:
+In hard tasks, while RoBERTa’s performance declines, it still performs better than SVM with an accuracy of 0.7241, F1-score of 0.7377, and AUC-score of 0.7133 versus SVM's 0.9623, 0.4904, and 0.6612. It's noteworthy that SVM's accuracy here is high, but its F1-score is significantly lower, suggesting that while it correctly identifies many instances, it struggles with the balance of precision and recall in more complex scenarios.
 
 ## Future Work
 Our project has laid a solid foundation and shown promising results. However, to further enhance the capabilities and applicability of our model, we are planning the following advancements:
@@ -110,3 +120,5 @@ Challenge: Currently, our model is relatively inaccurate when dealing with long 
 
 3. Extension into More Languages
 - Goal: To make our tool universally applicable by supporting multiple programming languages. This extension will help cater to a broader audience, including developers working in diverse coding environments and scenarios.
+
+## Thanks to Professor Ritambhara Singh and all TAs!!!
