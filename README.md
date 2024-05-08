@@ -102,11 +102,11 @@ The result is shown below:
 
 RoBERTa outperforms SVM across most of metrics and difficulty levels, indicating its ability to handle both classification accuracy and balance between precision and recall.
 
-- Easy Tasks:
+- **Easy Tasks**:
 RoBERTa shows a significant advantage in all metrics with an accuracy of 0.9556, F1-score of 0.9565, and AUC-score of 0.9652 compared to SVM's 0.6833, 0.6698, and 0.7366 respectively. This suggests that RoBERTa is better suited for handling tasks where the complexity is lower.
-- Medium Tasks:
+- **Medium Tasks**:
 The performance gap between the two models narrows slightly in medium difficulty, but RoBERTa still maintains a strong lead with an accuracy of 0.8617, F1-score of 0.8602, and AUC-score of 0.8213 compared to SVM’s 0.7147, 0.6706, and 0.7173. This indicates RoBERTa's robustness in moderately challenging scenarios.
-- Hard Tasks:
+- **Hard Tasks**:
 In hard tasks, while RoBERTa’s performance declines, it still performs better than SVM with an accuracy of 0.7241, F1-score of 0.7377, and AUC-score of 0.7133 versus SVM's 0.9623, 0.4904, and 0.6612. It's noteworthy that SVM's accuracy here is high, but its F1-score is significantly lower, suggesting that while it correctly identifies many instances, it struggles with the balance of precision and recall in more complex scenarios.
 
 ## Future Work
