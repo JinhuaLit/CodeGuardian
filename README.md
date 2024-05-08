@@ -89,3 +89,14 @@ $$
 
 - Interpretation: An AUC score of 0.5 suggests no discriminative ability (equivalent to random guessing), while a score of 1.0 indicates perfect discrimination. A higher AUC value means a better performing model in terms of distinguishing between positive and negative classes across all thresholds.
 
+## Future Work
+Our project has laid a solid foundation and shown promising results. However, to further enhance the capabilities and applicability of our model, we are planning the following advancements:
+1. Adopt RoBERTa-Large Model
+- Objective: To leverage the increased model capacity of RoBERTa-Large for better understanding and generating context in our tasks. RoBERTa-Large, with its more extensive architecture, offers improved performance on a variety of NLP benchmarks, which could significantly boost the robustness and accuracy of our predictions. Or utilize data augmentation to artificially expand our dataset with more examples of long code entries, which will help in training our model to handle such cases effectively.
+
+2. Improve Testing Accuracy on Ultra Long Code Entries
+Challenge: Currently, our model is relatively inaccurate when dealing with long sequences of code, which are challenging due to their complexity and the requirement for maintaining long-term dependencies.
+- Approach: One solution could be enhancing our model's attention mechanisms to handle long-distance dependencies in code better, possibly integrating more sophisticated variants like sparse or global attention.
+
+3. Extension into More Languages
+- Goal: To make our tool universally applicable by supporting multiple programming languages. This extension will help cater to a broader audience, including developers working in diverse coding environments and scenarios.
