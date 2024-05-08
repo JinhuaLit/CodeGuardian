@@ -1,0 +1,4 @@
+{
+    "summarize": "You are going to receive an entry of {code}. Please summarize the {code} into natural language, which will later be used for reproducing the code. Also make note of the computer language used",
+    "reproduce": "You are going to receive an entry of {code summary, language}. Please generate a code in the language with the instructions in the code summary"
+}
