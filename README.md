@@ -35,9 +35,12 @@ To ensure balance and fairness in our training data, we exploratorily analyzed o
 You can follow the procedure in the notebook to see the outputs. 
 
 ## Training the model
+In order to train our model, following pipelines are adopted:
+![Data Generation](./images/roberta.png)
 ### RoBerta-base
 We trained our model using computing power from *Google Colab* in `roberta/roberta.ipynb`. You can follow the procedures inside to train the model. 
 
+![Data Generation](./images/svm.png)
 ### SVM
 The trained SVM model is included in 'SVM/SVM.ipynb.'
 
