@@ -63,7 +63,7 @@ In this project, we employ several evaluation metrics to assess the performance 
 Description: Accuracy measures the proportion of true results (both true positives and true negatives) among the total number of cases examined. It gives us a straightforward indication of the model's overall correctness across all classes.
 Formula:
 
-​$$
+$$
 \text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}
 $$
  
@@ -82,8 +82,10 @@ $$
 4. AUC Score (Area Under the ROC Curve)
 Description: The AUC score is the area under the Receiver Operating Characteristic (ROC) curve, which is a plot of the true positive rate against the false positive rate at various threshold settings. The AUC score represents the likelihood of the model distinguishing between the positive and negative classes.
 Formula:
+
 $$
 \text{AUC Score} = \int_{x=0}^{1} \text{ROC curve}
 $$
+
 Interpretation: An AUC score of 0.5 suggests no discriminative ability (equivalent to random guessing), while a score of 1.0 indicates perfect discrimination. A higher AUC value means a better performing model in terms of distinguishing between positive and negative classes across all thresholds.
 
