@@ -5,6 +5,12 @@ we fine-tuned RoBerta-base model with our self-collected data. This repository h
 2. Exploratory Data Analysis
 3. Model Training and Deployment 
 
+## Demo
+We developed a Flask web app to host our model. It can be accessed here: [demo](http://codecovenant.com/)
+![web demo](./images/demo.png)
+You can input a piece of code snippet and the model will classify whether the code is written by human or AI. 
+The lines that contributed the most to the prediction result will be highlighed in color.
+
 ## Requirements
 Since this repo involves training and tuning the model, please have the following packages installed before proceeding. Alternatively, you may choose to use tools like *Google Colab*. 
 ```
@@ -23,3 +29,28 @@ from Huggingface (url). To generate AI-written code and ensure that the AI code 
 ![Data Generation](./images/generation.png)
 
 To generate AI-written code, we adopted OpenAI's api and asychronously retrived response from ChatGPT model. The prompts are stored in `llm/prompts.json` file. We then used `llm/data_generation.py` to retrieve asych responses from the api. 
+
+## Exploratory Data Analysis
+To ensure balance and fairness in our training data, we exploratorily analyzed our training data using `eda/EDA.ipynb`. Inside, we generated word cloud images and distribution of code file lengths in our data. 
+You can follow the procedure in the notebook to see the outputs. 
+
+
+## Training the model
+We trained our model using computing power from *Google Colab* in `roberta/roberta.ipynb`. You can follow the procedures inside to train the model. 
+
+### Pre-trained model
+To use our already fine-tuned model, you can directly use it from Huggingface. To use the pretrained tokenizer and 
+model, run the following lines:
+
+```
+tokenizer = AutoTokenizer.from_pretrained("lebretou/code-human-ai")
+model = AutoModelForSequenceClassification.from_pretrained("lebretou/code-human-ai")
+```
+
+To use the same encoder that we used, please download the pickle file `llm/label_encoder` with the following line:
+```
+# Load label encoder
+with open('label_encoder.pkl', 'rb') as file:
+    label_encoder = pickle.load(file)
+```
+
