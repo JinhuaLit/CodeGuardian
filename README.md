@@ -121,4 +121,7 @@ Challenge: Currently, our model is relatively inaccurate when dealing with long 
 3. Extension into More Languages
 - Goal: To make our tool universally applicable by supporting multiple programming languages. This extension will help cater to a broader audience, including developers working in diverse coding environments and scenarios.
 
+## Reference
+- [Automatic Detection of Machine Generated Text: A Critical Survey](https://arxiv.org/pdf/2011.01314)
+
 ## Thanks to Professor Ritambhara Singh and all TAs!!!
